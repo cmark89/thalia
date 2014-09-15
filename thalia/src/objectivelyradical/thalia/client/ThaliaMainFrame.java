@@ -29,8 +29,9 @@ import java.net.URI;
 import java.util.ArrayList;
 import javax.swing.JTabbedPane;
 
-public class ThaliaMain {
+public class ThaliaMainFrame {
 
+	Settings settings;
 	private JFrame frame;
 
 	/**
@@ -50,12 +51,12 @@ public class ThaliaMain {
 	private JLabel trope2label;
 	private JLabel trope3label;
 	private JPanel FullMode;
-	private ThaliaSettings Settings;
+	private ThaliaSettingsPanel Settings;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ThaliaMain window = new ThaliaMain();
+					ThaliaMainFrame window = new ThaliaMainFrame();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,7 +68,7 @@ public class ThaliaMain {
 	/**
 	 * Create the application.
 	 */
-	public ThaliaMain() {
+	public ThaliaMainFrame() {
 		initialize();
 		loadTropes();
 	}
@@ -135,10 +136,10 @@ public class ThaliaMain {
 		QuickMode_Main.add(trope3label);
 		QuickMode_Main.add(trope3link);
 		
-		FullMode = new JPanel();
+		FullMode = new ThaliaFullPanel();
 		QuickModeTabPane.addTab("Full Mode", null, FullMode, "Randomize genre and themes, giving multiple tropes for each.  Supports partial rerolling.");
 		
-		Settings = new ThaliaSettings();
+		Settings = new ThaliaSettingsPanel();
 		QuickModeTabPane.addTab("Settings", null, Settings, null);
 	}
 	

@@ -48,6 +48,9 @@ public class Trope implements Serializable{
 	public void setSubtype(int val) {
 		subtypeIndex = val;
 	}
+	public int getSubtype() {
+		return subtypeIndex;
+	}
 	
 	public String subtypeToString() {
 		if(type == TropeType.Narrative) {
