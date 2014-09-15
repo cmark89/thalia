@@ -78,7 +78,7 @@ public class ThaliaMainFrame {
 	 */
 	private void initialize() {
 		frame = new JFrame("Thalia");
-		frame.setBounds(100, 100, 500, 300);
+		frame.setBounds(100, 100, 500, 380);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		trope1link = new LinkableLabel("", "");
@@ -140,7 +140,8 @@ public class ThaliaMainFrame {
 		QuickModeTabPane.addTab("Full Mode", null, FullMode, "Randomize genre and themes, giving multiple tropes for each.  Supports partial rerolling.");
 		
 		Settings = new ThaliaSettingsPanel();
-		QuickModeTabPane.addTab("Settings", null, Settings, null);
+		Settings.setToolTipText("");
+		QuickModeTabPane.addTab("Settings", null, Settings, "Modify settings for Thalia to customize your experience.");
 	}
 	
 	private void loadTropes() {
@@ -172,43 +173,5 @@ public class ThaliaMainFrame {
 		
 		link.setText(trope.getName());
 		link.setUrl(trope.getUrl());
-	}
-	
-	class LinkableLabel extends JLabel {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		String targetURL;
-		
-		public LinkableLabel(String text, String url) {
-			setText("<html><a href=\"" + url + "\">" + text + "</a></html>");
-			targetURL = url;
-			
-			addMouseListener(new MouseAdapter(){
-				public void mouseClicked(MouseEvent e) {
-					try {
-						Desktop.getDesktop().browse(new URI(targetURL));
-					} catch (Exception ex) {
-						ex.printStackTrace();
-					}
-				}
-				public void mouseEntered(MouseEvent e) {
-					setCursor(new Cursor(Cursor.HAND_CURSOR));
-				}
-				public void mouseExited(MouseEvent e) {
-					setCursor(Cursor.getDefaultCursor());
-				}
-			});
-		}
-		
-		@Override
-		public void setText(String text) {
-			super.setText("<html><a href=\"" + targetURL + "\">" + text + "</a></html>");
-		}
-
-		public void setUrl(String url) {
-			targetURL = url;
-		}
 	}
 }

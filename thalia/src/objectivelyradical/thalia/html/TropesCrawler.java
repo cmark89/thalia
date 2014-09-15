@@ -211,6 +211,7 @@ public class TropesCrawler {
 					new BufferedReader(new InputStreamReader(page.openStream()));
 			
 			boolean reading = false;
+			boolean tropesFound = false;
 			String line;
 			String url;
 			String title;
@@ -243,7 +244,16 @@ public class TropesCrawler {
 					// the <hr /> tags do not parse correctly
 					break;	
 				}
-					
+				
+				if(line.contains("<div class=") 
+						&& !line.contains("<div class=\"folderlabel\"")) {
+					// seek to the end of the div block
+					String subline;
+					while((subline = in.readLine()) != null) {
+						if(subline.contains("</div>"))
+							break;
+					}
+				}
 				
 				if(line.contains("<li>") && line.contains("class='twikilink'")) {
 					// We've found a link to a trope page.  We now need to 
@@ -264,7 +274,6 @@ public class TropesCrawler {
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return pageTropes;

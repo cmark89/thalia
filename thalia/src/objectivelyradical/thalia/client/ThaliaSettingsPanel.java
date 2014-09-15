@@ -30,6 +30,9 @@ import javax.swing.JScrollBar;
 import java.awt.List;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.awt.Color;
 import java.awt.Button;
 import java.awt.Panel;
@@ -37,6 +40,8 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeModel;
@@ -81,7 +86,7 @@ public class ThaliaSettingsPanel extends JPanel {
 		
 		// TODO: Don't make a new one unless we don't have a settings file
 		// TODO: Get this from the main client
-		currentSettings = new Settings();
+		currentSettings = Settings.getInstance();
 		
 		setLayout(new MigLayout("", "[145px][grow][][][grow][][grow]", "[45px,grow][][][][][][grow]"));
 		
@@ -117,6 +122,13 @@ public class ThaliaSettingsPanel extends JPanel {
 				&& currentSettings.getChosenGenre() >= 0) {
 			chosenGenre.setSelectedIndex(currentSettings.getChosenGenre());
 		}
+		
+		chosenGenre.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				currentSettings.setChosenGenre(chosenGenre.getSelectedIndex());
+			}
+		});
 		verticalBox.add(chosenGenre);
 		
 		Box horizontalBox = Box.createHorizontalBox();
@@ -133,6 +145,17 @@ public class ThaliaSettingsPanel extends JPanel {
 		Box horizontalBox_1 = Box.createHorizontalBox();
 		verticalBox_1.add(horizontalBox_1);
 		
+		ChangeListener spinnerListener = new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				currentSettings.setNarrativeCount((int)narrativeCount.getValue());
+				currentSettings.setGenreCount((int)genreCount.getValue());
+				currentSettings.setTopic1Count((int)topic1Count.getValue());
+				currentSettings.setTopic2Count((int)topic2Count.getValue());
+			}
+			
+		};
+		
 		JLabel lblNarrative = new JLabel("Narrative");
 		horizontalBox_1.add(lblNarrative);
 		
@@ -142,6 +165,7 @@ public class ThaliaSettingsPanel extends JPanel {
 		narrativeCount = new JSpinner();
 		narrativeCount.setModel(new SpinnerNumberModel
 				(currentSettings.getNarrativeTropeCount(), 0, 4, 1));
+		narrativeCount.addChangeListener(spinnerListener);
 		horizontalBox_1.add(narrativeCount);
 		
 		Box horizontalBox_2 = Box.createHorizontalBox();
@@ -156,6 +180,7 @@ public class ThaliaSettingsPanel extends JPanel {
 		genreCount = new JSpinner();
 		genreCount.setModel(new SpinnerNumberModel
 				(currentSettings.getGenreTropeCount(), 0, 4, 1));
+		genreCount.addChangeListener(spinnerListener);
 		horizontalBox_2.add(genreCount);
 		
 		Box horizontalBox_3 = Box.createHorizontalBox();
@@ -170,6 +195,7 @@ public class ThaliaSettingsPanel extends JPanel {
 		topic1Count = new JSpinner();
 		topic1Count.setModel(new SpinnerNumberModel
 				(currentSettings.getTopic1TropeCount(), 1, 4, 1));
+		topic1Count.addChangeListener(spinnerListener);
 		horizontalBox_3.add(topic1Count);
 		
 		Box horizontalBox_4 = Box.createHorizontalBox();
@@ -184,6 +210,7 @@ public class ThaliaSettingsPanel extends JPanel {
 		topic2Count = new JSpinner();
 		topic2Count.setModel(new SpinnerNumberModel
 				(currentSettings.getTopic2TropeCount(), 0, 4, 1));
+		topic2Count.addChangeListener(spinnerListener);
 		horizontalBox_4.add(topic2Count);
 		
 		applyButton = new JButton("Apply");

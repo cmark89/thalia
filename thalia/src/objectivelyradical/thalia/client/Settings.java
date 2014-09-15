@@ -11,6 +11,15 @@ import objectivelyradical.thalia.tropes.Trope;
 import objectivelyradical.thalia.tropes.TropeType;
 
 public class Settings {
+	
+	// Settings is a singleton
+	private static Settings _instance;
+	public static Settings getInstance() {
+		if(_instance == null)
+			_instance = new Settings();
+		return _instance;
+	}
+	
 	ArrayList<Trope> allTropes;
 	
 	// Store the categories that can be rolled
@@ -43,6 +52,15 @@ public class Settings {
 	ArrayList<Trope> narrativeTropes = new ArrayList<Trope>();
 	ArrayList<Trope> genreTropes = new ArrayList<Trope>();
 	ArrayList<Trope> topicTropes = new ArrayList<Trope>();
+	public ArrayList<Trope> getNarrativeTropes() {
+		return narrativeTropes;
+	}
+	public ArrayList<Trope> getGenreTropes() {
+		return genreTropes;
+	}
+	public ArrayList<Trope> getTopicTropes() {
+		return topicTropes;
+	}
 	
 	boolean randomizeGenre = true;
 	int chosenGenre = -1;
@@ -76,6 +94,18 @@ public class Settings {
 	}
 	public int getTopic2TropeCount() {
 		return topic2TropeCount;
+	}
+	public void setNarrativeCount(int i) {
+		narrativeTropeCount = i;
+	}
+	public void setGenreCount(int i) {
+		genreTropeCount = i;
+	}
+	public void setTopic1Count(int i) {
+		topic1TropeCount = i;
+	}
+	public void setTopic2Count(int i) {
+		topic2TropeCount = i;
 	}
 	public ArrayList<NarrativeType> getEnabledNarrativeTypes() {
 		return narrativeTypes;
