@@ -35,7 +35,6 @@ public class ThaliaFullPanel extends JPanel {
 	JPanel narrativeTropePanel;
 	JPanel genreTropePanel;
 	JPanel topic1TropePanel;
-	JPanel topic2TropePanel;
 	
 	GenreType genreType;
 	JLabel genre;
@@ -68,14 +67,9 @@ public class ThaliaFullPanel extends JPanel {
 		genreTropePanel.setLayout(new GridLayout(2, 2, 0, 0));
 		
 		topic1TropePanel = new JPanel();
-		topic1TropePanel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Topic 1:", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		topic1TropePanel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Topic Tropes", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		add(topic1TropePanel);
 		topic1TropePanel.setLayout(new GridLayout(2, 2, 0, 0));
-	
-		topic2TropePanel = new JPanel();
-		topic2TropePanel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Topic 2:", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-		add(topic2TropePanel);
-		topic2TropePanel.setLayout(new GridLayout(2, 2, 0, 0));
 		
 		Box horizontalBox = Box.createHorizontalBox();
 		add(horizontalBox);
@@ -110,7 +104,6 @@ public class ThaliaFullPanel extends JPanel {
 		narrativeTropePanel.removeAll();
 		genreTropePanel.removeAll();
 		topic1TropePanel.removeAll();
-		topic2TropePanel.removeAll();
 		
 		currentTropes.clear();
 		
@@ -148,7 +141,10 @@ public class ThaliaFullPanel extends JPanel {
 			currentTropes.add(t);
 			
 			LinkableLabel newLabel = new LinkableLabel
-					("(" + t.subtypeToString() + ") " + t.getName(), t.getUrl());
+					("", t.getUrl());
+			newLabel.setText("<html>(" + t.subtypeToString() + ") " +
+					"<a href=\"" + t.getUrl() + "\">" + 
+					t.getName() + "</a></html>", true);
 			newLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			narrativeTropePanel.add(newLabel);			
 		}
@@ -167,53 +163,21 @@ public class ThaliaFullPanel extends JPanel {
 			currentTropes.add(t);
 			
 			LinkableLabel newLabel = new LinkableLabel
-					("(" + t.subtypeToString() + ") " + t.getName(), t.getUrl());
+					("", t.getUrl());
+			newLabel.setText("<html>(" + t.subtypeToString() + ") " +
+					"<a href=\"" + t.getUrl() + "\">" + 
+					t.getName() + "</a></html>", true);
 			newLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			genreTropePanel.add(newLabel);	
 		}
 		
 		System.out.println("Roll topic tropes.");
-		// Roll the two topics to use
-		TopicType[] topicTypes = new TopicType[2];
-		topicTypes[0] = currentSettings.getEnabledTopicTypes().get
-				((int)(Math.random() * currentSettings.getEnabledTopicTypes().size()));
-		topicTypes[1] = null;
-		while(topicTypes[1] == null) 
-		{
-			topicTypes[1] = currentSettings.getEnabledTopicTypes().get
-					((int)(Math.random() * currentSettings.getEnabledTopicTypes().size()));
-			
-			if(topicTypes[1] == topicTypes[0])
-				topicTypes[1] = null;
-		}
-		
-		// We now have our two topics.  Change the headings of those panes...
-		TitledBorder border = (TitledBorder)(topic1TropePanel.getBorder());
-		border.setTitle("Topic 1: " + topicTypes[0].toString());
-		border = (TitledBorder)(topic2TropePanel.getBorder());
-		border.setTitle("Topic 2: " + topicTypes[1].toString());
-		
-		// Get lists of all tropes that can match those two topics
-		ArrayList<Trope> topic1Tropes = new ArrayList<Trope>();
-		ArrayList<Trope> topic2Tropes = new ArrayList<Trope>();
-		
-		TopicType[] _types = TopicType.values();
-		for(Trope tr : currentSettings.getTopicTropes()) {
-			if(_types[tr.getSubtype()] == topicTypes[0])
-				topic1Tropes.add(tr);
-			else if(_types[tr.getSubtype()] == topicTypes[1])
-				topic2Tropes.add(tr);
-		}
-		
-		// Check for null lists, and raise an error if they occur...
-		size = topic1Tropes.size();
-		for(int i = 0; i < currentSettings.getTopic1TropeCount(); i++)
-		{
+		size = currentSettings.getTopicTropes().size();
+		for(int i = 0; i < currentSettings.getTopicTropeCount(); i++) {
 			boolean valid = false;
 			while(!valid) {
-				int roll = (int)(Math.random() * size);
-				System.out.println("Rolled item " + roll + " / " + size);
-				t = topic1Tropes.get(roll);
+				t = currentSettings.getTopicTropes()
+						.get((int)(Math.random() * size));
 				if(!currentTropes.contains(t))
 					valid = true;
 			}
@@ -221,28 +185,12 @@ public class ThaliaFullPanel extends JPanel {
 			currentTropes.add(t);
 			
 			LinkableLabel newLabel = new LinkableLabel
-					("(" + t.subtypeToString() + ") " + t.getName(), t.getUrl());
+					("", t.getUrl());
+			newLabel.setText("<html>(" + t.subtypeToString() + ") " +
+					"<a href=\"" + t.getUrl() + "\">" + 
+					t.getName() + "</a></html>", true);
 			newLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			topic1TropePanel.add(newLabel);	
-		}
-		size = topic2Tropes.size();
-		for(int i = 0; i < currentSettings.getTopic2TropeCount(); i++)
-		{
-			boolean valid = false;
-			while(!valid) {
-				int roll = (int)(Math.random() * size);
-				System.out.println("Rolled item " + roll + " / " + size);
-				t = topic2Tropes.get(roll);
-				if(!currentTropes.contains(t))
-					valid = true;
-			}
-			
-			currentTropes.add(t);
-			
-			LinkableLabel newLabel = new LinkableLabel
-					("(" + t.subtypeToString() + ") " + t.getName(), t.getUrl());
-			newLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			topic2TropePanel.add(newLabel);
+			topic1TropePanel.add(newLabel);
 		}
 	}
 	

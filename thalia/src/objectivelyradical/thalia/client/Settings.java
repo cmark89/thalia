@@ -68,8 +68,7 @@ public class Settings {
 	TopicType topic2;
 	int narrativeTropeCount = 2;
 	int genreTropeCount = 2;
-	int topic1TropeCount = 2;
-	int topic2TropeCount = 2;
+	int topicTropeCount = 3;
 	
 	public boolean getRandomizeGenre() {
 		return randomizeGenre;
@@ -89,11 +88,8 @@ public class Settings {
 	public int getGenreTropeCount() {
 		return genreTropeCount;
 	}
-	public int getTopic1TropeCount() {
-		return topic1TropeCount;
-	}
-	public int getTopic2TropeCount() {
-		return topic2TropeCount;
+	public int getTopicTropeCount() {
+		return topicTropeCount;
 	}
 	public void setNarrativeCount(int i) {
 		narrativeTropeCount = i;
@@ -101,11 +97,8 @@ public class Settings {
 	public void setGenreCount(int i) {
 		genreTropeCount = i;
 	}
-	public void setTopic1Count(int i) {
-		topic1TropeCount = i;
-	}
-	public void setTopic2Count(int i) {
-		topic2TropeCount = i;
+	public void setTopicCount(int i) {
+		topicTropeCount = i;
 	}
 	public ArrayList<NarrativeType> getEnabledNarrativeTypes() {
 		return narrativeTypes;

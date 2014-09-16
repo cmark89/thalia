@@ -69,8 +69,7 @@ public class ThaliaSettingsPanel extends JPanel {
 	
 	JSpinner narrativeCount;
 	JSpinner genreCount;
-	JSpinner topic1Count;
-	JSpinner topic2Count;
+	JSpinner topicCount;
 	
 	JButton applyButton;
 	
@@ -150,8 +149,7 @@ public class ThaliaSettingsPanel extends JPanel {
 			public void stateChanged(ChangeEvent e) {
 				currentSettings.setNarrativeCount((int)narrativeCount.getValue());
 				currentSettings.setGenreCount((int)genreCount.getValue());
-				currentSettings.setTopic1Count((int)topic1Count.getValue());
-				currentSettings.setTopic2Count((int)topic2Count.getValue());
+				currentSettings.setTopicCount((int)topicCount.getValue());
 			}
 			
 		};
@@ -186,32 +184,23 @@ public class ThaliaSettingsPanel extends JPanel {
 		Box horizontalBox_3 = Box.createHorizontalBox();
 		verticalBox_1.add(horizontalBox_3);
 		
-		JLabel lblTopic = new JLabel("Topic 1");
+		JLabel lblTopic = new JLabel("Topic");
 		horizontalBox_3.add(lblTopic);
 		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(47);
+		Component horizontalStrut_1 = Box.createHorizontalStrut(59);
 		horizontalBox_3.add(horizontalStrut_1);
 		
-		topic1Count = new JSpinner();
-		topic1Count.setModel(new SpinnerNumberModel
-				(currentSettings.getTopic1TropeCount(), 1, 4, 1));
-		topic1Count.addChangeListener(spinnerListener);
-		horizontalBox_3.add(topic1Count);
+		topicCount = new JSpinner();
+		topicCount.setModel(new SpinnerNumberModel
+				(currentSettings.getTopicTropeCount(), 0, 8, 1));
+		topicCount.addChangeListener(spinnerListener);
+		horizontalBox_3.add(topicCount);
 		
 		Box horizontalBox_4 = Box.createHorizontalBox();
 		verticalBox_1.add(horizontalBox_4);
 		
-		JLabel lblTopic_1 = new JLabel("Topic 2");
-		horizontalBox_4.add(lblTopic_1);
-		
 		Component horizontalStrut = Box.createHorizontalStrut(47);
 		horizontalBox_4.add(horizontalStrut);
-		
-		topic2Count = new JSpinner();
-		topic2Count.setModel(new SpinnerNumberModel
-				(currentSettings.getTopic2TropeCount(), 0, 4, 1));
-		topic2Count.addChangeListener(spinnerListener);
-		horizontalBox_4.add(topic2Count);
 		
 		applyButton = new JButton("Apply");
 		add(applyButton, "cell 5 4");
