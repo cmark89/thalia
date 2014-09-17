@@ -42,6 +42,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeModel;
@@ -202,7 +203,13 @@ public class ThaliaSettingsPanel extends JPanel {
 		Component horizontalStrut = Box.createHorizontalStrut(47);
 		horizontalBox_4.add(horizontalStrut);
 		
-		applyButton = new JButton("Apply");
+		applyButton = new JButton("Apply Trope Filter");
+		applyButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setSelectedTropes();
+			}
+		});
 		add(applyButton, "cell 5 4");
 		//JTree tree = new JTree();
 		//tree.setVisibleRowCount(10);
@@ -307,17 +314,35 @@ public class ThaliaSettingsPanel extends JPanel {
 	}
 	// Saves the selection tree into the settings' selected tropes
 	private void setSelectedTropes() {
+		NarrativeType[] _narrativeTypes = NarrativeType.values();
+		GenreType[] _genreTypes = GenreType.values();
+		TopicType[] _topicTypes = TopicType.values();
+		
+		ArrayList<NarrativeType> narrative = new ArrayList<NarrativeType>();
+		ArrayList<GenreType> genre = new ArrayList<GenreType>();
+		ArrayList<TopicType> topic = new ArrayList<TopicType>();
+		
 		TreePath[] paths = tropeCheckTree.getCheckingModel().getCheckingPaths();
 		for(TreePath t : paths) {
-			TropeTreeNode node = (TropeTreeNode)t.getLastPathComponent();
-			if(node.getType() == TropeType.Narrative) {
-				
-			} else if(node.getType() == TropeType.Genre) {
-				
-			} else if(node.getType() == TropeType.Topic) {
-				
+			DefaultMutableTreeNode node = 
+					(DefaultMutableTreeNode)t.getLastPathComponent();
+			
+			if(node.isLeaf()) {
+				Object nodeObject = node.getUserObject();
+				TropeTreeNode trope = (TropeTreeNode)nodeObject;
+				if(trope.getType() == TropeType.Narrative) {
+					narrative.add(_narrativeTypes[trope.getSubtype()]);
+				} else if(trope.getType() == TropeType.Genre) {
+					genre.add(_genreTypes[trope.getSubtype()]);
+				} else if(trope.getType() == TropeType.Topic) {
+					topic.add(_topicTypes[trope.getSubtype()]);
+				}
 			}
 			
+			currentSettings.setNarrativeTypes(narrative);
+			currentSettings.setGenreTypes(genre);
+			currentSettings.setTopicTypes(topic);
+			currentSettings.updateTropes();
 		}
 	}
 

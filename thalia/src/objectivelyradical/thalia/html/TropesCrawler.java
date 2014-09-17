@@ -48,14 +48,12 @@ public class TropesCrawler {
 	};
 	final String[] topicPages = new String[] {
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/AbuseTropes",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ADishonorableIndex",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/AForgivingIndex",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/AfterlifeTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/AnimalTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/AnnoyanceTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/AnxietyTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ApathyIndex",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/APoliteIndex",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/IndexOfApologies",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/AuthorityTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/BargainTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/BetrayalTropes",
@@ -73,12 +71,15 @@ public class TropesCrawler {
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/DeathTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/DignityTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/DiscordTropes",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ADishonorableIndex",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/DistractionTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/DoctorIndex",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/DoorTropes",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ThisIsYourIndexOnDrugs",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/DuelingTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ElementsOfNature",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/EmotionTropes",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TheseTropesAreEqual",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ExcuseOfAnIndex",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TheExIndex",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/IndexFailure",
@@ -88,6 +89,8 @@ public class TropesCrawler {
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/FateAndProphecyTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/FlyingTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/FoodTropes",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TropesForSale",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/AForgivingIndex",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/FrenemyTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/FriendshipTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/FurnitureTropes",
@@ -95,9 +98,6 @@ public class TropesCrawler {
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/GeometryTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/HealingAndCuringTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/IgnoredIndex",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/IndexInTheSky",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/IndexOfApologies",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/IndexOfSolutions",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/InjuryTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/IntelligenceTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/LanguageTropes",
@@ -113,10 +113,13 @@ public class TropesCrawler {
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/MoralityTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/MythologyTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/NationalStereotypingTropes",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TropesOfNature",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/NumberTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ObsessionTropes",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ThisIndexIsInTheWay",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/OccupationTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/PhilosophyTropes",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/APoliteIndex",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/PoliticsTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/PovertyTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/Power",
@@ -139,34 +142,32 @@ public class TropesCrawler {
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/SexualHarassmentAndRapeTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ShapesAndSymbolsTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/SilenceTropes",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/IndexInTheSky",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/SociologyTropes",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/IndexOfSolutions",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/SourGrapesTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/SplitPersonalityTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/StealthTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/StupidityTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/SubstitutionTropes",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TropesAboutTaboos",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TextTropes",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TheseTropesAreEqual",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ThisIndexIsInTheWay",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ThisIndexIsUnstoppable",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ThisIsYourIndexOnDrugs",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ThreateningTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TimeTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TinyTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ToyTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TreasureTropes",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TropesAboutTaboos",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TropesForSale",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TropesOfNature",
-			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TropesOfWisdom",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TruthAndLies",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/ThisIndexIsUnstoppable",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/VandalismTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/VehicleIndex",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/VelocityIndex",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/VictoryAndDefeat",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/WalkingTropes",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/WeatherAndEnvironment",
+			"http://tvtropes.org/pmwiki/pmwiki.php/Main/TropesOfWisdom",
 			"http://tvtropes.org/pmwiki/pmwiki.php/Main/WorkplaceTropes",
+			
 	};
 	
 	public TropesCrawler() {
@@ -246,8 +247,9 @@ public class TropesCrawler {
 				}
 				
 				if(line.contains("<div class=") 
-						&& !line.contains("<div class=\"folderlabel\"")) {
-					// seek to the end of the div block
+						&& !line.contains("<div class=\"folderlabel\"")
+						&& !line.contains("</div>")) {
+					// seek to the end of the div block as long as it's not on the same line
 					String subline;
 					while((subline = in.readLine()) != null) {
 						if(subline.contains("</div>"))

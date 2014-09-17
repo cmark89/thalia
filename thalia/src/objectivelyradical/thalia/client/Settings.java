@@ -64,8 +64,6 @@ public class Settings {
 	
 	boolean randomizeGenre = true;
 	int chosenGenre = -1;
-	TopicType topic1;
-	TopicType topic2;
 	int narrativeTropeCount = 2;
 	int genreTropeCount = 2;
 	int topicTropeCount = 3;
@@ -109,6 +107,15 @@ public class Settings {
 	public ArrayList<TopicType> getEnabledTopicTypes() {
 		return topicTypes;
 	}
+	public void setNarrativeTypes(ArrayList<NarrativeType> types) {
+		narrativeTypes = types;
+	}
+	public void setGenreTypes(ArrayList<GenreType> types) {
+		genreTypes = types;
+	}
+	public void setTopicTypes(ArrayList<TopicType> types) {
+		topicTypes = types;
+	}
 	
 	public Settings() {
 		// After initializing our arrays, we need to build the list of tropes
@@ -117,7 +124,7 @@ public class Settings {
 		updateTropes();
 	}
 	
-	private void updateTropes() {
+	public void updateTropes() {
 		// Clear the trope lists
 		narrativeTropes.clear();
 		genreTropes.clear();
@@ -144,6 +151,12 @@ public class Settings {
 		}
 		
 		// We now have a list containing all the tropes allowed by the settings
+
+		// COUNT NEWS TROPES
+		for(Trope t : genreTropes) {
+			if(GenreType.News.ordinal() == t.getSubtype())
+				System.out.println("FOUND NEWS");
+		}
 	}
 	
 	
