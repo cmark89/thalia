@@ -284,7 +284,7 @@ public class TropesCrawler {
 	public void saveTropesFile() {
 		ArrayList<Trope> tropes = indexTropes();
 		try {
-			FileOutputStream fos = new FileOutputStream("tropes.al");
+			FileOutputStream fos = new FileOutputStream(TROPES_FILE_NAME);
 			ObjectOutputStream ob = new ObjectOutputStream(fos);
 			ob.writeObject(tropes);
 			ob.close();
@@ -298,7 +298,8 @@ public class TropesCrawler {
 	public ArrayList<Trope> loadTropesFile() {
 		ArrayList<Trope> tropes = new ArrayList<Trope>();
 		try {
-			FileInputStream fin = new FileInputStream("tropes.al");
+			InputStream fin = getClass().getClassLoader().
+					getResourceAsStream(TROPES_FILE_NAME);
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			tropes = (ArrayList<Trope>)ois.readObject();
 			ois.close();
