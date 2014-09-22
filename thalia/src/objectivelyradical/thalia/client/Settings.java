@@ -20,6 +20,21 @@ public class Settings {
 		return _instance;
 	}
 	
+	ThaliaApplet applet;
+	public void setApplet(ThaliaApplet ta) {
+		applet = ta;
+	}
+	public ThaliaApplet getApplet() {
+		return applet;
+	}
+	boolean isApplet = false;
+	public void setIsApplet(boolean b) {
+		isApplet = b;
+	}
+	public boolean isApplet() {
+		return isApplet;
+	}
+	
 	ArrayList<Trope> allTropes;
 	
 	// Store the categories that can be rolled

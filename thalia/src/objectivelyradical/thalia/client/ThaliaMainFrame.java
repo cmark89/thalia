@@ -81,67 +81,7 @@ public class ThaliaMainFrame {
 		frame.setBounds(100, 100, 500, 380);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		trope1link = new LinkableLabel("", "");
-		
-		trope2link = new LinkableLabel("", "");
-		
-		trope3link = new LinkableLabel("", "");
-		
-		QuickModeTabPane = new JTabbedPane(JTabbedPane.TOP);
-		QuickModeTabPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		frame.getContentPane().add(QuickModeTabPane, BorderLayout.CENTER);
-		
-		QuickMode = new JPanel();
-		QuickModeTabPane.addTab("Quick Mode", null, QuickMode, "A simple mode that generates three tropes completely at random.  Ideal for flash fiction, or as a way to discover new pages on TVTropes.");
-		QuickMode.setLayout(new BorderLayout(0, 0));
-		
-		label_1 = new JLabel("Quick Mode");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setFont(new Font("Dialog", Font.BOLD, 20));
-		QuickMode.add(label_1, BorderLayout.NORTH);
-		
-		QuickMode_Footer = new JPanel();
-		QuickMode.add(QuickMode_Footer, BorderLayout.SOUTH);
-		QuickMode_Footer.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		button = new JButton("Roll Tropes");
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				rollTropes();
-			}
-		});
-		button.setFont(new Font("Dialog", Font.BOLD, 16));
-		QuickMode_Footer.add(button);
-		
-		QuickMode_Main = new JPanel();
-		QuickMode.add(QuickMode_Main, BorderLayout.CENTER);
-		QuickMode_Main.setLayout(new GridLayout(3, 2, 0, 0));
-		
-		trope1label = new JLabel("");
-		trope1label.setHorizontalAlignment(SwingConstants.CENTER);
-		trope1label.setFont(new Font("Dialog", Font.BOLD, 12));
-		QuickMode_Main.add(trope1label);
-		QuickMode_Main.add(trope1link);
-		
-		trope2label = new JLabel("");
-		trope2label.setHorizontalAlignment(SwingConstants.CENTER);
-		trope2label.setFont(new Font("Dialog", Font.BOLD, 12));
-		QuickMode_Main.add(trope2label);
-		QuickMode_Main.add(trope2link);
-		
-		trope3label = new JLabel("");
-		trope3label.setHorizontalAlignment(SwingConstants.CENTER);
-		trope3label.setFont(new Font("Dialog", Font.BOLD, 12));
-		QuickMode_Main.add(trope3label);
-		QuickMode_Main.add(trope3link);
-		
-		FullMode = new ThaliaFullPanel();
-		QuickModeTabPane.addTab("Full Mode", null, FullMode, "Randomize genre and themes, giving multiple tropes for each.  Supports partial rerolling.");
-		
-		Settings = new ThaliaSettingsPanel();
-		Settings.setToolTipText("");
-		QuickModeTabPane.addTab("Settings", null, Settings, "Modify settings for Thalia to customize your experience.");
+		frame.getContentPane().add(new ThaliaTabbedPanel());
 	}
 	
 	private void loadTropes() {
@@ -150,28 +90,5 @@ public class ThaliaMainFrame {
 		System.out.println("Tropes loaded successfully.");
 	}
 	
-	private void rollTropes() {
-		final int NUMBER_TO_ROLL = 3;
-		ArrayList<Trope> rolledTropes = new ArrayList<Trope>();
-		Trope t;
-		int index;
-		while(rolledTropes.size() < NUMBER_TO_ROLL) {
-			index = (int)(Math.random() * tropes.size());
-			if(!rolledTropes.contains(tropes.get(index))) {
-				rolledTropes.add(tropes.get(index));
-			}
-		}
-		// Now add change the 3 labels
-		setLabel(trope1label, trope1link, rolledTropes.get(0));
-		setLabel(trope2label, trope2link, rolledTropes.get(1));
-		setLabel(trope3label, trope3link, rolledTropes.get(2));
-	}
 	
-	private void setLabel(JLabel label, LinkableLabel link, final Trope trope) {
-		label.setText("(" + trope.getTropeType().toString() + 
-				" - " + trope.subtypeToString() + ")");
-		
-		link.setText(trope.getName());
-		link.setUrl(trope.getUrl());
-	}
 }

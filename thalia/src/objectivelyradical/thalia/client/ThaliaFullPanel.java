@@ -7,6 +7,8 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import java.applet.AppletContext;
 import java.awt.Component;
 import java.awt.Desktop;
 
@@ -19,6 +21,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -200,8 +203,14 @@ public class ThaliaFullPanel extends JPanel {
 			public void run() {
 				for(Trope t : currentTropes) {
 					try {
-						Desktop.getDesktop().browse(new URI(t.getUrl()));
-						Thread.sleep(1000);
+						if(currentSettings.isApplet()) {
+							AppletContext a = Settings.getInstance().getApplet().
+									getAppletContext();
+							a.showDocument(new URL(t.getUrl()),  "_blank");
+						} else {
+							Desktop.getDesktop().browse(new URI(t.getUrl()));
+							Thread.sleep(1000);
+						}
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}

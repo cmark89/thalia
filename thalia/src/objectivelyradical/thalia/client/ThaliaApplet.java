@@ -17,14 +17,19 @@ public class ThaliaApplet extends JApplet {
         try {
             SwingUtilities.invokeAndWait(new Runnable() {
                 public void run() {
-                    ThaliaMainFrame frame = new ThaliaMainFrame();
+                    ThaliaTabbedPanel panel = new ThaliaTabbedPanel();
                 	//ThaliaFullPanel panel = new ThaliaFullPanel();
+                    getContentPane().add(panel);
                 	//add(panel);
                 }
             });
         } catch (Exception e) {
             System.err.println("createGUI didn't complete successfully");
         }
+        
+        Settings currentSettings = Settings.getInstance();
+        currentSettings.setIsApplet(true);
+        currentSettings.setApplet(this);
     }
 
 }
